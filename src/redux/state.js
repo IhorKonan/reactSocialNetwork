@@ -1,3 +1,7 @@
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sideBarReducer from "./sidebar-reducer";
+
 let store = {
   _state: {
     profilePage: {
@@ -25,31 +29,28 @@ let store = {
         { id: 4, name: 'Andrey' },
         { id: 5, name: 'Katya' },
         { id: 6, name: 'Valery' },
-      ]
-    }
-  },
-  getState() {
-    return this._state;
+      ],
+      newMessageText: ''
+    },
+    sidebar: {}
   },
   _callSubscriber() {
     console.log('Swew');
   },
-  addPost() {
-    let newPost = {
-      id: 5,
-      message: this._state.profilePage.newPostText,
-      likeCount: 0
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-  updateNewPostText(newText) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
+
+  getState() {
+    return this._state;
   },
   subscribe(observer) {
     this._callSubscriber = observer;
+  },
+
+  dispatch(action) {
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebar = sideBarReducer(this._state.sidebar, action);
+
+    this._callSubscriber(this.state);
   }
 }
 
