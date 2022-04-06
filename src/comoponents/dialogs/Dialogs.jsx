@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { sendMessageCreator, updateNewMessageBodyCreater } from '../../redux/dialogs-reducer';
 import DialogsItem from './dialogItem/DialogsItem';
 import s from './Dialogs.module.css';
