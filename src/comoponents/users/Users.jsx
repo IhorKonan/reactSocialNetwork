@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./users.module.css";
 import userPhoto from '../../img/userlogo.png'
 import { NavLink } from "react-router-dom";
-import * as axios from  'axios';
-import { usersAPI } from "../../api/api";
 
 let Users = (props) =>{
     let pagesCount = Math.ceil(150/props.pageSize);
