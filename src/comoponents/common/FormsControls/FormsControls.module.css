@@ -11,3 +11,8 @@
 {
     color: red;
 }
+.formErrorSumary {
+    border: red 1px solid;
+    padding: 5px;
+    color: rgb(107, 22, 22);
+}

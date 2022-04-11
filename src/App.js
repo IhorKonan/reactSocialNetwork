@@ -10,12 +10,23 @@ import UsersContainer from './comoponents/users/UsersContainer';
 import ProfileContainer from './comoponents/profile/ProfileContainer';
 import HeaderContainer from './comoponents/header/HeaderContainer';
 import Login from './comoponents/login/Login';
+import { connect } from 'react-redux';
+import { initializeApp } from './redux/app-reducer';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import Preloader from './comoponents/common/Preloader';
 
 
 
-
-const App = (props) => {
-  return(
+class App extends React.Component {
+  componentDidMount(){
+    this.props.initializeApp();
+  }
+  render(){
+    if(!this.props.initialized){
+      return <Preloader />
+    }
+    return (
         <div className='app-wraper'>
           <HeaderContainer />
           <Navbar />
@@ -29,8 +40,15 @@ const App = (props) => {
               <Route path='/login' render={ () => <Login />} />
           </div>
         </div>
-  );
+    )
+  }
 }
 
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
 
-export default App;
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {initializeApp}))(App);
