@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Profileinfo.module.css'
 import imageAva from './../../../img/userlogo.png'
-import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const Profileinfo = (props) => {
   return (
@@ -11,7 +11,7 @@ const Profileinfo = (props) => {
       </div> */}
       <div className={s.descriptionBlock}>
           <img src={props.profile.photos.small !== null ? props.profile.photos.small : imageAva} alt='ava' className={s.imgAva}></img>
-          <ProfileStatus status={props.status} upDateStatus={props.upDateStatus}/>
+          <ProfileStatusWithHooks status={props.status} upDateStatus={props.upDateStatus}/>
       </div>
     </div>
   );
