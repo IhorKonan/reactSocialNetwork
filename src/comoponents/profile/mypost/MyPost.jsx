@@ -1,5 +1,4 @@
-import { render } from '@testing-library/react';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import { maxLengthCreator, required } from '../../../utilits/validators/validators';
@@ -9,14 +8,9 @@ import Post from './post/Post';
 
 const MyPost = React.memo(props => {
 
-  // shouldComponentUpdate(nextProps, nextState){
-  //   return  nextProps != this.props || nextState != this.state;
-  // 
     let postsElements = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount} key={p.id} />)
-    let newPostElement = React.createRef();
 
     let onAddPost = (values) => {
-      debugger;
       props.addPost(values.newPostText);
     }
     return (
