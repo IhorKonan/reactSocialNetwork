@@ -34,6 +34,11 @@ const LoginForm = ({handleSubmit, error}) => {
                 <div>
                     <button>Login</button>
                 </div>
+                    <div>
+                        Данные тестового аккаунта:
+                        Email: free@samuraijs.com
+                        Password: free
+                    </div>
             </form>
     )
 }
