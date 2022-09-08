@@ -1,7 +1,5 @@
 // @ts-ignore
-import { APIResponseType } from "./api.ts";
-// @ts-ignore
-import { instance, GetItemsType } from './api.ts';
+import { instance, GetItemsType, APIResponseType } from './api.ts';
 
 
 
@@ -15,6 +13,6 @@ export const usersAPI = {
         return instance.post<APIResponseType>(`follow/${userId}`).then(res => res.data);
     },
     unfollow(userId: number) {
-        return instance.delete(`follow/${userId}`);
+        return instance.delete(`follow/${userId}`).then(res => res.data) as Promise<APIResponseType>;
     }
 }

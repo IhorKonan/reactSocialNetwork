@@ -7,6 +7,8 @@ import { usersAPI } from './../api/users-api.ts';
 // @ts-ignore
 import { updateObjectInArray } from "../utilits/object-helpers.ts";
 import { Dispatch } from 'redux';
+// @ts-ignore
+import { APIResponseType } from '../api/api.ts';
 
 
 
@@ -68,28 +70,31 @@ export const requestUsers = (page: number, pageSize: number): ThunkType => {
         dispatch(actions.setTotalUsersCount(data.totalCount));
     }
 }
-const _followUnfollowFlow = async (dispatch: Dispatch<ActionTypes>, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionTypes) => {
+const _followUnfollowFlow = async (dispatch: Dispatch<ActionTypes>, 
+                                    userId: number, 
+                                    apiMethod: (userId: number) => Promise<APIResponseType>, 
+                                    actionCreator: (userId: number) => ActionTypes) => {
     dispatch(actions.toggleFollowingProgress(true, userId));
     let response = await apiMethod(userId);
-
-    if (response.data.resultCode === 0) {
+                                        
+    if (response.resultCode == 0) {
         dispatch(actionCreator(userId))
     }
     dispatch(actions.toggleFollowingProgress(false, userId));
 }
 export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess);
+       await _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess);
     }
 }
 export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess);
+       await _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess);
     }
 }
 
 export default usersReducer;
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 type ActionTypes = InfernActionsTypes<typeof actions>
 type ThunkType = BaseThunkType<ActionTypes>

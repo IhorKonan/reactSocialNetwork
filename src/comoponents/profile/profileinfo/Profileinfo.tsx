@@ -13,8 +13,6 @@ import { ProfileType, ContactsType } from '../../../types/types.ts';
 import Preloader from '../../common/Preloader/Preloader.tsx';
 
 
-
-
 type PropsType = {
   profile: ProfileType | null
   status: string
@@ -23,13 +21,13 @@ type PropsType = {
   savePhoto: (file: File) => void
   saveProfile: (profile: ProfileType) => Promise<any>
 }
-const Profileinfo: React.FC<PropsType> = ({profile, status, upDateStatus, isOwner, savePhoto, saveProfile}) => {
+const Profileinfo: React.FC<PropsType> = ({ profile, status, upDateStatus, isOwner, savePhoto, saveProfile }) => {
   let [editMode, setEditMode] = useState(false);
-  if(!profile){
+  if (!profile) {
     return <Preloader />
   }
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-    if(e.target.files && e.target.files.length){
+    if (e.target.files && e.target.files.length) {
       savePhoto(e.target.files[0]);
     }
   }
@@ -42,12 +40,12 @@ const Profileinfo: React.FC<PropsType> = ({profile, status, upDateStatus, isOwne
   return (
     <div>
       <div className={s.descriptionBlock}>
-          <img src={profile.photos.small !== null ? profile.photos.small : imageAva} alt='ava' className={s.imgAva}></img>
-          { isOwner && <input type={'file'} onChange={onMainPhotoSelected}/> }
-          { editMode 
-          ? <ProfileDataFormReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile}/> 
-          : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {setEditMode(true)}}/>}
-          <ProfileStatusWithHooks status={status} upDateStatus={upDateStatus}/>
+        <img src={profile.photos.small !== null ? profile.photos.small : imageAva} alt='ava' className={s.imgAva}></img>
+        {isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}
+        {editMode
+          ? <ProfileDataFormReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile} />
+          : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => { setEditMode(true) }} />}
+        <ProfileStatusWithHooks status={status} upDateStatus={upDateStatus} />
       </div>
     </div>
   );
@@ -77,11 +75,11 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({ profile, isOwner, goToEdi
       </div>
       <div>
         <b>Сontacts</b>: {
-        Object
-          .keys(profile.contacts)
-          .map(key => {
-        return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]} />
-      })}
+          Object
+            .keys(profile.contacts)
+            .map(key => {
+              return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]} />
+            })}
       </div>
     </div>
   )
@@ -90,8 +88,8 @@ type ContactsPropsType = {
   contactTitle: string
   contactValue: string
 }
-const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
-    return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
-  }
+const Contact: React.FC<ContactsPropsType> = ({ contactTitle, contactValue }) => {
+  return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
+}
 
 export default Profileinfo;

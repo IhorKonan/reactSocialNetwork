@@ -3,7 +3,7 @@ import { InjectedFormProps, reduxForm } from "redux-form";
 // @ts-ignore
 import { maxLengthCreator, required } from "../../../../utilits/validators/validators.ts";
 // @ts-ignore
-import { createField, GetStringKeys, Input } from '../../../common/FormsControls/FormsControls.tsx';
+import { createField, GetStringKeys, Textarea } from '../../../common/FormsControls/FormsControls.tsx';
 
 const maxLenght10 = maxLengthCreator(10);
 type PropsOwnType = {
@@ -18,7 +18,7 @@ const AddPostForm: React.FC<InjectedFormProps<AddPostFormValuesType, PropsOwnTyp
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                {createField<AddPostFormValuesKeys>("Enter your message", "newPostText", [required, maxLenght10], Input)}
+                {createField<AddPostFormValuesKeys>("Enter your message", "newPostText", [required, maxLenght10], Textarea)}
                 {/* <Field name="newPostText" component={Textarea} placeholder='Enter your message' validate={[required, maxLenght10]} /> */}
             </div>
             <div>
