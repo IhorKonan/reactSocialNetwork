@@ -1,7 +1,5 @@
 import React from 'react';
 //@ts-ignore
-import { PostType } from '../../../../types/types.ts';
-//@ts-ignore
 import s from './Post.module.css'
 
 type PropsType = {
