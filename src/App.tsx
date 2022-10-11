@@ -16,11 +16,11 @@ import News from './comoponents/news/News.tsx';
 // @ts-ignore
 import Settings from './comoponents/settings/Settings.tsx';
 // @ts-ignore
-import UsersContainer from './comoponents/users/UsersContainer.tsx';
+import { UsersPage } from './comoponents/users/UsersContainer.tsx';
 //@ts-ignore
 import HeaderContainer from './comoponents/header/HeaderContainer.tsx';
 // @ts-ignore
-import Login from './comoponents/login/Login.tsx';
+import { Login } from './comoponents/login/Login.tsx';
 // @ts-ignore
 import { initializeApp } from './redux/app-reducer.ts';
 // @ts-ignore
@@ -70,7 +70,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
             <Route path='/dialogs' render={() => <SuspendedDialogs />} />
             <Route path='/news' render={() => <News />} />
             <Route path='/music' render={() => <Music />} />
-            <Route path='/users' render={() => <UsersContainer pageTitle={'Possible friends'} />} />
+            <Route path='/users' render={() => <UsersPage pageTitle={'Possible friends'} />} />
             <Route path='/settings' render={() => <Settings />} />
             <Route path='/login' render={() => <Login />} />
             <Route path='*' render={() => <div>404 NOT FOUND</div>} />
