@@ -13,6 +13,8 @@ import User from "./User.tsx";
 // @ts-ignore
 import UsersSearchForm from "./UsersSearchForm.tsx";
 import * as queryString from 'query-string'
+// @ts-ignore
+import { UserType } from "../../types/types.ts";
 
 
 type PropsType = {}
@@ -20,7 +22,7 @@ type PropsType = {}
 type QueryParamsType = {term?: string, page?: string, friend?: string}
 
 export const Users: FC<PropsType> = (props) => {
-    const users = useSelector(getUsers)
+    const users: UserType = useSelector(getUsers)
     const totalUsersCount = useSelector(getTotalUsersCount)
     const currentPage = useSelector(getCurrentPage)
     const pageSize = useSelector(getPageSize)
@@ -57,9 +59,9 @@ export const Users: FC<PropsType> = (props) => {
         const query: QueryParamsType = {}
         if(!!filter.term) query.term = filter.term
         if(filter.friend !== null) query.friend = String(filter.friend)
-        if(currentPage != 1) query.page = String(currentPage)
+        if(currentPage !== 1) query.page = String(currentPage)
         history.push({
-            pathname: '/users',
+            pathname: '/developers',
             search: queryString.stringify(query)
             // `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
         })
