@@ -13,6 +13,8 @@ import appReducer from "./app-reducer.ts";
 import authReducer from "./auth-reducer.ts";
 // @ts-ignore
 import dialogsReducer from "./dialogs-reducer.ts";
+// @ts-ignore
+import chatReducer from "./chat-reducer.ts";
 
 let rootReducers = combineReducers({
   profilePage: profileReducer,
@@ -21,7 +23,8 @@ let rootReducers = combineReducers({
   usersPage: usersReducer,
   auth: authReducer,
   app: appReducer,
-  form: formReducer
+  form: formReducer,
+  chat: chatReducer
 });
 
 type RootReducersType = typeof rootReducers;

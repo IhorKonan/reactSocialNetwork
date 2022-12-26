@@ -33,16 +33,18 @@ import 'antd/dist/reset.css';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
-
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 // @ts-ignore
 const ProfileContainer = React.lazy(() => import('./comoponents/profile/ProfileContainer.tsx'));
 // @ts-ignore
 const DialogsContainer = React.lazy(() => import('./comoponents/dialogs/DialogsContainer.tsx'));
+// @ts-ignore
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage.tsx'));
 
 const SuspendedProfile = withSuspens(ProfileContainer)
 const SuspendedDialogs = withSuspens(DialogsContainer)
+const SuspendedChatPage = withSuspens(ChatPage)
 
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
@@ -119,7 +121,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                 </span>
               }
             >
-              <Menu.Item key="9">option9</Menu.Item>
+              <Menu.Item key="9"><Link to='/chat'>Chat</Link></Menu.Item>
               <Menu.Item key="10">option10</Menu.Item>
               <Menu.Item key="11">option11</Menu.Item>
               <Menu.Item key="12">option12</Menu.Item>
@@ -136,6 +138,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
             <Route path='/developers' render={() => <UsersPage pageTitle={'Possible developers'} />} />
             <Route path='/settings' render={() => <Settings />} />
             <Route path='/login' render={() => <Login />} />
+            <Route path='/chat' render={() => <SuspendedChatPage />} />
             <Route path='*' render={() => <div>404 NOT FOUND</div>} />
            </Switch>
         </Content>
